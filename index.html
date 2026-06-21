@@ -65,7 +65,8 @@
         }
 
         /* Lenis smooth scrolling styles */
-        html.lenis {
+        html.lenis,
+        html.lenis body {
             height: auto;
         }
         .lenis.lenis-smooth {
@@ -76,6 +77,11 @@
         }
         .lenis.lenis-stopped {
             overflow: hidden;
+        }
+        /* Override Webflow overflow lock so Lenis can control scroll */
+        html, body {
+            overflow: auto !important;
+            height: auto !important;
         }
     </style>
 </head>
@@ -1274,8 +1280,18 @@
     <script src="https://unpkg.com/lenis@1.1.0/dist/lenis.min.js"></script>
     <script>
         const lenis = new Lenis({
-            autoRaf: true,
+            lerp: 0.1,           // smoothing factor (0 = instant, 1 = very slow)
+            duration: 1.2,       // scroll animation duration in seconds
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            touchMultiplier: 2,  // increases touch scroll speed on mobile
+            infinite: false,
         });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
     </script>
 </body>
 
