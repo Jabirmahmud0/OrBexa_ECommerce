@@ -63,6 +63,20 @@
             visibility: hidden !important;
             opacity: 0 !important;
         }
+
+        /* Lenis smooth scrolling styles */
+        html.lenis {
+            height: auto;
+        }
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
     </style>
 </head>
 
@@ -1256,6 +1270,13 @@
     <script src="https://cdn.prod.website-files.com/6821ab168da22523fb043f40/js/webflow.schunk.389fec8aa109a357.js" type="text/javascript"></script>
     <script src="https://cdn.prod.website-files.com/6821ab168da22523fb043f40/js/webflow.schunk.70baf25ca9836f69.js" type="text/javascript"></script>
     <script src="https://cdn.prod.website-files.com/6821ab168da22523fb043f40/js/webflow.cdfc856d.a42cc8297a40c8de.js" type="text/javascript"></script>
+    <!-- Lenis Smooth Scrolling -->
+    <script src="https://unpkg.com/lenis@1.1.0/dist/lenis.min.js"></script>
+    <script>
+        const lenis = new Lenis({
+            autoRaf: true,
+        });
+    </script>
 </body>
 
 </html>
